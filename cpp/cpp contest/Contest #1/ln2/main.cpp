@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    int n;
+    short sign = 1;
+    float res = 0;
+
+    cin >> n;
+
+    for (float i = 1; i < n+1; i++) {
+        res += (1 / i) * sign;
+        sign = -sign;
+    }
+    cout << res << endl; 
+    return 0;
+}
