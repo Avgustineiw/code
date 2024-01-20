@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-//test
+//test 2
 int main()
 {
     int n;
