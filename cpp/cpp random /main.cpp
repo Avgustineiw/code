@@ -1,3 +1,4 @@
+//
 #include <iostream>
 #include <stdlib.h>
 
@@ -12,5 +13,6 @@ typedef unsigned char  u8;
 
 int main()
 {
-    
+  
+  return 0;
 }

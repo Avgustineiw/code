@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <string>
 
 typedef long  s64;
 typedef int   s32;
@@ -12,11 +13,11 @@ typedef unsigned char  u8;
 
 int main()
 {
-  u16 m, n;
+  std::string str;
 
-  std::cin >> m >> n;
-
-  std::cout << (m * n) / 2;
-
+  std::cin >> str;
+  
+  str[0] = toupper(str[0]);
+  std::cout << str;
   return 0;
-} 
+}
