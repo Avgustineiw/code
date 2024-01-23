@@ -13,12 +13,35 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
-using namespace std;
+
+int mystrlen(char* str) //std::string& s
+{
+  int n, count = 0;
+  int i = 0;
+
+  while (str[i] != 0) {
+    count += 1;
+    i++;
+  } 
+
+  return count;
+}
 
 int main()
 {
-    // TODO: input your code here
-    char str[256] = "Hello world";
-    cout << strlen(str); 
-    return 0;
+  int len = 0;
+  char string[256] = "";
+
+  char* w = string;
+  char* y = string;
+
+
+  std::cin >> string;
+  len = mystrlen(string);
+
+  y[0] = 'r';
+  std::cout << len << std::endl;
+  std::cout << y << " " << w;
+
+  return 0;
 }

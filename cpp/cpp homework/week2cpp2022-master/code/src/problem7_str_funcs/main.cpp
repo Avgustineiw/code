@@ -17,49 +17,29 @@
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
-using namespace std;
-
-//The first bit of code compares c-strings and prints their length
-//The second bit of code does the same, but with string-s. 
 
 int main()
 {
-    // This is the code for c-style strings.    
-    char str_1[] = "Hello World";
-    char str_2[] = "Cat";
-    int val;
-    val = strcmp(str_1, str_2);
-    if (val < 0) {
-        cout << "string 1 is less than string 2" << endl;
-    }
-    else if (val > 0) {
-        cout << "string 2 is less than string 1" << endl;
-    }
-    else {
-        cout << "string 1 is equal to string 2" << endl;
-    }
+  std::string string_1;
+  std::string string_2;
 
-    cout << "The length of string 1 is: "<< strlen(str_1) << endl;
-    cout << "The length of string 2 is: "<< strlen(str_2) << endl;
+  std::getline(std::cin, string_1);
+  std::getline(std::cin, string_2);
 
+  if (string_1 > string_2) {
+    std::cout << "2" << std::endl;
+  }
+  else if (string_1 < string_2) {
+    std::cout << "1" << std::endl;
+  }
+  else {
+    std::cout << "Equal" << std::endl;
+  }
 
-    // This is the code for string-s.
-    string str_3 = "Hello world";
-    string str_4 = "Cat";
-    
-    cout << "The size of string 1 is: " << str_3.size() << endl;
-    cout << "The length of string 2 is: " << str_4.length() << endl;
+  std::cout << string_1.length() << std::endl;
+  std::cout << string_2.length() << std::endl;
 
-    if (str_3 == str_4) {
-        cout << "The strings are equal";
-    }
-    else if (str_3 > str_4) {
-        cout << "String 4 is less than string 3";
-    }
-    else {
-        cout << "String 3 is less than string 4";
-    }
-    return 0;
+  return 0; 
 }
 
 
