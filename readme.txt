@@ -1,1 +1,1 @@
-I hate my life, but love maths and code ;)
+A repo for my uni coding stuff
