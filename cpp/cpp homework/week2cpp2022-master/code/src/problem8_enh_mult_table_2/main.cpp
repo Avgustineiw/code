@@ -24,12 +24,12 @@ int main()
     cout << "Enter the first value: "; 
     cin >> m;
     
+    cout << "Enter the second value: ";
+    cin >> n;
+
     if (n <= 0 || m <= 0) {
         break;
     }
-
-    cout << "Enter the second value: ";
-    cin >> n;
 
     cout << "   ";
 
