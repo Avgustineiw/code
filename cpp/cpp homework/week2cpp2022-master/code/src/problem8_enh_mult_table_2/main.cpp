@@ -21,10 +21,10 @@ int main()
     short m;
     short n;
 
-    cout << "Enter the first value or 0 to exit: "; 
+    cout << "Enter the first value: "; 
     cin >> m;
     
-    if (m == 0) {
+    if (n <= 0 || m <= 0) {
         break;
     }
 
