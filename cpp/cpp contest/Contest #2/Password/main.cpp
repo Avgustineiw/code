@@ -61,7 +61,7 @@ bool validPassword(std::string str)
 int main()
 {
   std::string str;
-
+  
   getline(std::cin, str);
 
   if (validPassword(str)) {
