@@ -1,0 +1,59 @@
+Proofs:
+1. Empty set is unique 
+https://math.stackexchange.com/questions/972253/proving-that-the-empty-set-is-unique
+
+2-4. Induction implies another induction.
+https://math.berkeley.edu/~vojta/115/ho2.pdf
+
+5. Integer division 
+Dashkov's book, p.30
+
+6. For any numbers a, b, m, it holds that a ≡ b (mod m) iff a and b leave the same remainder
+when divided by m.
+Dashkov's book, p.31
+
+7. If a ≡ c (mod m) and b ≡ d (mod m), then a + b ≡ c + d (mod m) and ab ≡ cd
+(mod m).
+p.32
+
+8. Infinitely many primes
+https://www-users.york.ac.uk/~ss44/cyc/p/primeprf.htm
+
+9. The divisibility criterion for integers in terms of prime factorization.
+p.33
+
+10. There exists a unique greatest common divisor for any two integers.
+p.33
+
+11. If a and b are coprime, and a | bc, then a | c.
+p. 34 Lemma 7.10
+
+12. B ́ezout’s Identity.
+p. 34
+
+13. Numbers a and m are coprime iff there exists x such that ax ≡ 1 (mod m).
+p.36 Cor 7.16
+
+14. Euler’s Theorem implies Fermat’s Little Theorem.
+p.36 Th. 7.19
+
+15. If gcd(a, m) = 1 and x ≡ y (mod φ(m)), then a^x ≡ a^y (mod m).
+p.37 Cor. 7.22
+
+16. The Euclidean Algorithm terminates for each input.
+https://math.stackexchange.com/questions/1852297/why-does-the-euclidean-algorithm-always-terminate
+
+17. Solving a linear equation in two integer variables.
+p. 39 Th 8.3
+
+18. Russell’s Paradox.
+p. 19 Lemma 4.12
+
+19. If X ⊆ Y then P(X) ⊆ P(Y).
+https://www.youtube.com/watch?v=6zS1d91wVY8
+
+20. Set inclusion in terms of union and intersection.
+p.21 Lemma 4.19
+
+21. The ordered pair equality criterion.
+p. 24 Lemma 4.25

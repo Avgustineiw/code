@@ -13,9 +13,17 @@
 
 #include <iostream>
 
-void transformArray(int* arr, int size, int (*transorm)(int))
+int f(int x)
 {
+  return x * 2;
+}
 
+void transformArray(int* arr, int size, int (*transform)(int))
+{
+  for (int i = 0; i < size; i++) {
+    arr[i] = f(arr[i]);
+  }
+  
 }
 
 int main()
@@ -26,7 +34,15 @@ int main()
 
   int arr[n];
 
-  //transformArray(arr, n);
+  for (int i = 0; i < n; i++) {
+    std::cin >> arr[i];
+  }
+  
+  transformArray(arr, n, f);
 
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
+  }
+  
   return 0;
 }

@@ -13,14 +13,19 @@
 
 #include <iostream>
 
+void f()
+{
+  std::cout << "Hello world";
+}
+
 void executeCallback(void (*callback)()) 
 {
-  
+  callback();
 }
 
 int main()
 {
-
+  executeCallback(f);
 
   return 0;
 }
