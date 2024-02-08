@@ -1,13 +1,9 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 int main()
 {
-    short n;
-    short k;
-    short m;
-    short res = 0;
+    int n, k, m, res = 0;
 
     cin >> n;
     cin >> k;
@@ -24,4 +20,3 @@ int main()
     }
     cout << res << endl;
     return 0;
-}
