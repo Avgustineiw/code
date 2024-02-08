@@ -14,7 +14,6 @@ void readBombs(char **field, int bombs)
   }
 }
 
-
 int BombNearby(int pos_row, int pos_col, int row, int col, char **field)
 {
   int nearby[8][2] = {{pos_row+1,  pos_col},
