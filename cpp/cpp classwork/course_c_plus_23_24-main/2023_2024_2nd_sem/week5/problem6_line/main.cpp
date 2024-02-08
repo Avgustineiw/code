@@ -12,9 +12,29 @@
 #include <iostream>
 #include <string>
 
-void extractLineToFile(const std::string& inputFilePath, const std::string& outputFilePath, int lineNum);
-int main() {
-    extractLineToFile("input.txt", "specific_line.txt", 3);
-    return 0;
+void extractLineToFile(const std::string& inputFilePath, const std::string& outputFilePath, int lineNum)
+{
+  std::ifstream myIN(inputFilePath);
+  std::ofstream myOUT(outputFilePath);
+  std::string res;
+  int i = 0;
+  
+  while (!myIN.eof()) {
+    getline(myIN, res);
+    i++;
+
+    if (i == lineNum) {
+      myOUT << res;
+    }
+  }
+
+  myIN.close();
+  myOUT.close();  
 }
 
+
+int main() {
+  extractLineToFile("input.txt", "specific_line.txt", 3);
+  
+  return 0;
+}

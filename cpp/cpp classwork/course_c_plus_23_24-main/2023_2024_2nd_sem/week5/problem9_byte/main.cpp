@@ -10,9 +10,15 @@
 #include <fstream>
 #include <iostream>
 
-void reverseCopyBinaryFile(const std::string& inputFilePath, const std::string& outputFilePath);
+
+void reverseCopyBinaryFile(const std::string& inputFilePath, const std::string& outputFilePath)
+{
+  
+}
+
 
 int main() {
-    reverseCopyBinaryFile("input_binary.bin", "output_reversed.bin");
-    return 0;
+  reverseCopyBinaryFile("input_binary.bin", "output_reversed.bin");
+  
+  return 0;
 }

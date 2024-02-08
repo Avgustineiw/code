@@ -10,10 +10,32 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
+#include <fstream>
+
+
+void removeBlank(const std::string& inputFilePath, 
+                 const std::string& outputFilePath)
+{
+  std::ifstream myIN(inputFilePath);
+  std::ofstream myOUT(outputFilePath);
+  std::string temp;
+
+  while (!myIN.eof()) {
+    getline(myIN, temp);
+
+    if (!temp.empty()) {
+      myOUT << temp << std::endl;
+    }
+  }
+
+  myIN.close();
+  myOUT.close();
+}
+
 
 int main()
 {
-    // Your code here
+  removeBlank("input.txt", "output.txt");
 
-    return 0;
+  return 0;
 }

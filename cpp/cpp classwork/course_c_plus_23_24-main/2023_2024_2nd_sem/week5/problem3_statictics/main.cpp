@@ -25,7 +25,7 @@ void countFileStatistics(const std::string& filePath)
   }
 
   myIN.clear();
-  myIN.seekg(0);
+  myIN.seekg(1);
 
   while(!myIN.eof()) {
     myIN >> tmp;

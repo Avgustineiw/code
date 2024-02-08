@@ -14,16 +14,35 @@
 #include <cctype> // For isalpha() and tolower()
 
 char caesarCipher(char ch, int shift) {
-    if (std::isalpha(ch)) {
-        char base = std::islower(ch) ? 'a' : 'A';
-        return (ch - base + shift) % 26 + base;
-    }
-    return ch;
+  if (std::isalpha(ch)) {
+      char base = std::islower(ch) ? 'a' : 'A';
+      return (ch - base + shift) % 26 + base;
+  }
+
+  return ch;
 }
 
-void encryptFileContent(const std::string& inputFilePath, const std::string& outputFilePath, int shift = 3);
+
+void encryptFileContent(const std::string& inputFilePath, const std::string& outputFilePath, int shift = 3)
+{
+  std::ifstream in(inputFilePath);
+  std::ofstream out(outputFilePath);
+  std::string str;
+
+  while (!in.eof()) {
+    getline(in, str);
+
+    for (int i = 0; i < str.length(); i++) {
+      str[i] = caesarCipher(str[i], 3);
+    }
+
+    out << str << std::endl;
+  }
+}
+
 
 int main() {
-    encryptFileContent("input.txt", "encrypted.txt");
-    return 0;
+  encryptFileContent("input.txt", "encrypted.txt");
+
+  return 0;
 }

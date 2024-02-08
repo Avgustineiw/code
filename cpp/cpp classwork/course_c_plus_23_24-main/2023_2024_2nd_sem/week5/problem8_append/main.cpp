@@ -12,9 +12,19 @@
 #include <iostream>
 #include <string>
 
-void appendToFile(const std::string& filePath, const std::string& content);
+void appendToFile(const std::string& filePath, const std::string& content)
+{
+  std::ofstream myFile;
+  myFile.open(filePath, std::ios_base::app);
+
+  myFile << content;
+
+  myFile.close();
+}
+
 
 int main() {
-    appendToFile("existing_file.txt", "Appended content.\n");
-    return 0;
+  appendToFile("existing_file.txt", "Appended content.\n");
+
+  return 0;
 }
