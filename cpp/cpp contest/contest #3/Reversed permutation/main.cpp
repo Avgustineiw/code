@@ -1,34 +1,27 @@
-#include <iostream>
-#include <cstdlib>
 #include <algorithm>
-#include <string>
+#include <cstdlib>
 #include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>
 
-void permutation(int *arr, int size)
-{
-  for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
-      if (arr[j] == i + 1) {
-        std::cout << j + 1 << " ";
-        break;
-      }
-    }
-  }
-}
-
-
-int main()
-{
-  int n, tmp;
+int main() {
+  int n;
   std::cin >> n;
-  int arr[n];
+  std::vector<int> arr(n, 0), res(n, 0);
 
   for (int i = 0; i < n; i++) {
-    std::cin >> tmp;
-    arr[i] = tmp;
+    std::cin >> arr[i];
+    arr[i] -= 1;
   }
 
-  permutation(arr, n);
+  for (int i = 0; i < n; i++) {
+    res[arr[i]] = i;
+  }
+
+  for (int i = 0; i < n; i++) {
+    std::cout << res[i] + 1 << " ";
+  }
 
   return 0;
 }

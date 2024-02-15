@@ -58,5 +58,8 @@
       "functional": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
-    "cSpell.language": "en,ru"
+    "cSpell.language": "en,ru",
+    "cSpell.words": [
+      "тру́сов"
+    ]
 }
