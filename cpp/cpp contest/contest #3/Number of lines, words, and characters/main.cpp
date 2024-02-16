@@ -9,8 +9,7 @@ void countFileStatistics(const std::string& filePath, int &chars, int &words, in
   bool word_flag = false;
 
   while (in >> std::noskipws >> ch) {
-    if ((int(ch) > 64 && int(ch) < 91) || 
-        (int(ch) > 96 && int(ch) < 123)) {
+    if (isalpha(ch)) {
       chars++;
       word_flag = true;
     }

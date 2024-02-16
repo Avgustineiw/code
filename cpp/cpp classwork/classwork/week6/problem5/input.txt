@@ -1,0 +1,3 @@
+Jacob,Junior,100
+Mike,Senior,200
+Paul,Middle,150

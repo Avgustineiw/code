@@ -17,34 +17,25 @@
 #include <iostream>
 #include <sstream> 
 
-void countFileStatistics(const std::string& filePath, int n, int m);
-bool correct(int x, int y, int n, int m);
+void countFileStatistics(int n, int m);
 
-bool correct(int x, int y, int n, int m) 
+
+void countFileStatistics(int n, int m) 
 {
-  return x >= 0 && x < n && y >= 0 && y < m;
-}
+  int x = 0, y = 0, cnt = 1, curdir = 1, pos = 0;
+  int data[n][m];
+  int dir[2] = {0, m};
 
-void countFileStatistics(const std::string& filePath, int n, int m) 
-{
-  int x = 0, y = 0, cnt = 0, curdir = 0;
-  int data[x][y];
-  int dir[2][2] = {{0,1}, {0, -1}};
+  for (int i = 0; i < n; i++) { 
+    for (int j = dir[pos]-pos; j != dir[pos+curdir]-pos; j += curdir) {
+      data[i][j] = cnt;
+      cnt++;
+    }
 
-  while (cnt < n * m) { 
-    data[x][y] = cnt;
-    cnt++;
-    int nx = x + dir[curdir][0];
-    int ny = y + dir[curdir][1];
-    if (!correct(nx, ny, n, m)) {
-      nx = nx + 1;
-      curdir = (curdir + 1) % 2;
-    }
-    else {
-      x = nx;
-      y = ny;
-    }
+    curdir = -curdir;
+    pos = (pos + 1) % 2;
   }
+  
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < m; j++)
@@ -61,7 +52,7 @@ int main() {
 
   std::cin >> n >> m;
 
-  countFileStatistics("file.txt", n, m);
+  countFileStatistics(n, m);
 
   return 0;
 }
