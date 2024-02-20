@@ -22,32 +22,40 @@ void reverseFileContent(const std::string& inputFilePath, const std::string& out
 {
   std::ifstream myIN(inputFilePath);
   std::ofstream myOUT(outputFilePath);
+
   std::string line, word;
-  int cnt = 0, salary;
+  int salary;
+
+  char del = ' ';
+  std::string s = inputFilePath.substr(inputFilePath.size()-3, 3);
+  std::cout << s << std::endl;
+  if ( s == "csv") { 
+    del = ',';
+  }
 
   while (!myIN.eof()) {
     getline(myIN, line);
     std::stringstream iss(line);
 
-    while (getline(iss, word, ',')) {
-      if (cnt < 2) {
-        myOUT << word << ",";
-        cnt++;
-      }
-      else {
-        salary = (stoi(word) * 1.1);
-        myOUT << salary;
-        cnt = 0;
-      }
-    }
+    std::string name, position, ssalary;
+    getline(iss, name, del); 
+    
+    getline(iss, position, del); 
+    
+    getline(iss, ssalary, del); 
+    
+    salary = (atoi(ssalary.c_str()) * 1.1);
+    myOUT <<name << del << position << del << salary;
     myOUT << "\n";
   }
+  myIN.close();
+  myOUT.close();
 }
 
 
 int main() 
 {
-  reverseFileContent("input.txt", "output_reversed.txt");
+  reverseFileContent("input.csv", "output_reversed.txt");
   
   return 0;
 }
