@@ -3,8 +3,7 @@
 
 int main()
 {
-  int a;
-  int i;
+  int a, i;
 
   std::cin >> a >> i;
   

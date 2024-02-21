@@ -17,6 +17,7 @@
 int main()
 {
     // Your code here
-
+    std::cout << (29 << 2) << '\n';
+    std::cout << (29 >> 2) << '\n';
     return 0;
 }

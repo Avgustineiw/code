@@ -20,38 +20,27 @@
 /// 
 ////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
-using namespace std;
 
 int main()
 {
-    short m;
-    short n;
-    
-    cin >> m;
-    cin >> n;
+  int n, m;
+  std::cin >> m >> n;
+  std::cout << '\t';
 
-    cout << "   ";
+  for (short i = 1; i < n+1; i++) {
+      std::cout << i << "\t";
+  }
+  std::cout << '\n';
 
-    for (short i = 1; i < n+1; i++)
-    {
-        cout << i << "  ";
-    }
-    cout << endl;
-
-    for (short i = 1; i < m+1; i++)
-    {
-        for (short i_1 = 0; i_1 < n+1; i_1++)
-        {
-            if (i_1 != 0) {
-                cout << i*i_1 << "  "; 
-            }
-            else {
-                cout << i << "  ";
-            }
-        }
-        cout << endl;
-    }
-    
-    return 0;
+  for (int i = 1; i < m+1; i++) {
+      for (int j = 0; j < n+1; j++) {
+          if (j != 0) 
+              std::cout << i*j << '\t'; 
+          else 
+              std::cout << i << '\t';
+      }
+      std::cout << '\n';
+  }
+  return 0;
 }
 
