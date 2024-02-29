@@ -49,13 +49,15 @@ struct Car
   int mileage;
 
 
-  Car(int y, std::string c, int d, double f = 50.0, double dis = 0.0) {
+  Car(int y = 1997, std::string c = "white", int d = 2, double f = 50.0, double dis = 0.0) {
       year = y;
       col = c;
       count_doors = d;
       fuel_level = f;
       mileage = dis;
   }
+
+
 
 
   void drive(double distance) {
@@ -113,6 +115,8 @@ struct Car
       << "Mileage: " << mileage << "\n\n";
   }
 };
+
+Car a[100];
 
 int main() 
 {

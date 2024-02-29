@@ -55,7 +55,10 @@
       "vector": "cpp",
       "algorithm": "cpp",
       "fstream": "cpp",
-      "functional": "cpp"
+      "functional": "cpp",
+      "__tree": "cpp",
+      "map": "cpp",
+      "set": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cSpell.language": "en,ru",
