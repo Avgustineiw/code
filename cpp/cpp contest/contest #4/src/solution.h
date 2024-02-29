@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 struct Task {
   std::string text;
@@ -56,25 +57,109 @@ int Task::getTotalLoad() const
   return res;
 }
 
+bool comp(Task a, Task b)
+{
+  if (a.getTotalLoad() < b.getTotalLoad()) 
+    return true;
+  else if (a.getTotalLoad() > b.getTotalLoad()) 
+    return false;
+  else {
+    if (a.date < b.date) 
+      return true;
+    else if (a.date > b.date) 
+      return false;
+    else {
+      if (a.text < b.text) 
+        return true;
+      else 
+        return false;
+    }
+   }
+}
+
 // task 3
 void sortTasks(std::vector<Task>& tasks)
 {
-  
+  sort(tasks.begin(), tasks.end(), comp);
 }
 
 // task 4
 int getWorkerLoad(const std::vector<Task>& allTasks, const Worker& worker)
 {
-  // replace with your own return
-  return 0;
+  int res = 0;
+
+  for (int i = 0; i < allTasks.size(); i++) {
+    Task task = allTasks[i];
+    for (std::map<std::string, int>::iterator it = task.workloads.begin(); it != task.workloads.end(); it++) {
+      std::pair<std::string, int> x;
+      x = *it;
+      if (x.first == worker.login) {
+        res += x.second;
+      }
+    }
+  }
+
+  return res;
 }
 
 // task 5
 void addTask(std::vector<Task>& tasks, const Task& newTask, const std::vector<Worker>& workers)
 {
+  std::string name; 
+  for (int i = 0; i < workers.size(); i++) {
+
+    std::string login = workers[i].login;
+    std::map<std::string, int> data = newTask.workloads;
+
+    for (std::map<std::string, int>::iterator it = data.begin(); it != data.end(); it++) {
+        std::pair<std::string, int> x;
+        x = *it;
+        if (x.first == login) {
+          if (workers[i].maxLoad < getWorkerLoad(tasks, workers[i]) + x.second) {
+            throw std::runtime_error("Overworked");
+          }
+          else {
+            tasks.push_back(newTask);
+          }
+      }
+    }
+  }
+}
+
+bool compText(const std::vector<std::string>& name_1, const std::vector<std::string>& name_2) 
+{
+  return name_1[0] <= name_2[0];
 }
 
 // task 6
 void addTaskVerbose(std::vector<Task>& tasks, const Task& newTask, const std::vector<Worker>& workers)
 {
+  tasks.push_back(newTask);
+  std::string name; 
+  std::vector<std::vector<std::string>> error;
+
+  for (int i = 0; i < workers.size(); i++) {
+    std::string login = workers[i].login;
+    int load = getWorkerLoad(tasks, workers[i]);
+    int max_load = workers[i].maxLoad;
+
+    if (max_load < load) {
+      error.push_back({login, std::to_string(load - max_load)});
+    }
+  }
+
+  sort(error.begin(), error.end(), compText);
+
+
+  if (error.size() > 0) {
+    std::string message = "Overworked: ";
+    for (int i = 0; i < error.size(); i++) {
+      message += error[i][0] + " by " + error[i][1];
+      if (i + 1 != error.size()) {
+        message += ", ";
+      }
+    }
+
+    throw std::runtime_error(message);
+  }
 }
