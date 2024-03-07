@@ -28,7 +28,7 @@ struct City
   Coordinate coordinate;
 
   bool operator<(const City& _city) const {
-    (*this).population < _city.population;
+    return (*this).population > _city.population;
   }
 };
 
@@ -38,7 +38,7 @@ struct Country
   std::set<City> cities;
 
   bool operator<(const Country& _country) const {
-    return (*this).cities < _country.cities;
+    return (*this).name < _country.name;
   }
 };
 
@@ -79,7 +79,7 @@ void fillCountries(std::istream& inFile, std::vector<Country>& countries)
       Country Con = {country_name, C};
       Con.cities.insert(_city);
       countries.push_back(Con);
-      // ec[country_name] = countries.size()-1;
+      ec[country_name] = countries.size()-1;
     }
   }
 }
@@ -107,7 +107,7 @@ int main()
   sort(countries.begin(), countries.end());
 
   for (int i = 0; i < countries.size(); i++) {
-    // std::cout << countries[i].name << std::endl;
+    std::cout << countries[i].name << std::endl;
 
     for (City city: countries[i].cities) {
       std::cout << city << std::endl;
