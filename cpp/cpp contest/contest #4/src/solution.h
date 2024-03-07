@@ -133,7 +133,7 @@ bool compText(const std::vector<std::string>& name_1, const std::vector<std::str
 
 // task 6
 void addTaskVerbose(std::vector<Task>& tasks, const Task& newTask, const std::vector<Worker>& workers)
-{
+{ 
   tasks.push_back(newTask);
   std::string name; 
   std::vector<std::vector<std::string>> error;
@@ -149,7 +149,6 @@ void addTaskVerbose(std::vector<Task>& tasks, const Task& newTask, const std::ve
   }
 
   sort(error.begin(), error.end(), compText);
-
 
   if (error.size() > 0) {
     std::string message = "Overworked: ";

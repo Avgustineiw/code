@@ -58,8 +58,6 @@ struct Car
   }
 
 
-
-
   void drive(double distance) {
     if (fuel_level - distance > 0) { 
       fuel_level -= distance/10;

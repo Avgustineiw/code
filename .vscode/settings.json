@@ -58,7 +58,8 @@
       "functional": "cpp",
       "__tree": "cpp",
       "map": "cpp",
-      "set": "cpp"
+      "set": "cpp",
+      "utility": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cSpell.language": "en,ru",
