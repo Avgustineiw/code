@@ -1,13 +1,13 @@
 #include <iostream>
 #include <numeric>
 
-struct rational
+struct Rational
 {
   int num;
   int denom;
   int div;
 
-  rational(int _num = 0, int _denom = 1) {
+  Rational(int _num = 0, int _denom = 1) {
     div = std::gcd(_num, _denom);
 
     num = _num / div;
@@ -20,28 +20,28 @@ struct rational
   };
 };
 
-rational operator+(rational A, rational B)
+Rational operator+(Rational A, Rational B)
 {
-  rational C(A.num*B.denom + A.denom*B.num, A.denom*B.denom);
+  Rational C(A.num*B.denom + A.denom*B.num, A.denom*B.denom);
   return C;
 }
 
-rational operator-(rational A, rational B)
+Rational operator-(Rational A, Rational B)
 {
-  rational C(A.num*B.denom - A.denom*B.num, A.denom*B.denom);
+  Rational C(A.num*B.denom - A.denom*B.num, A.denom*B.denom);
   return C;
 }
 
 
-rational operator*(rational A, rational B)
+Rational operator*(Rational A, Rational B)
 {
-  rational C(A.num*B.num, B.denom*A.denom);
+  Rational C(A.num*B.num, B.denom*A.denom);
   return C;
 }
 
-rational operator/(rational A, rational B)
+Rational operator/(Rational A, Rational B)
 {
-  rational C(B.denom, B.num);
+  Rational C(B.denom, B.num);
   return (A*B);
 }
 
@@ -51,10 +51,10 @@ int main()
   int num_2, denom_2;
   std::cin >> num_1 >> denom_1 >> num_2 >> denom_2;
 
-  rational frac_1(num_1, denom_1);
-  rational frac_2(num_2, denom_2);
+  Rational frac_1(num_1, denom_1);
+  Rational frac_2(num_2, denom_2);
 
-  rational frac = frac_1 + frac_2;
+  Rational frac = frac_1 + frac_2;
 
   std::cout << frac.num << " " << frac.denom;
 } 

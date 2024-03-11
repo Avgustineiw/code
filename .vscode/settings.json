@@ -59,7 +59,9 @@
       "__tree": "cpp",
       "map": "cpp",
       "set": "cpp",
-      "utility": "cpp"
+      "utility": "cpp",
+      "random": "cpp",
+      "deque": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cSpell.language": "en,ru",

@@ -149,7 +149,7 @@ void addTaskVerbose(std::vector<Task>& tasks, const Task& newTask, const std::ve
   }
 
   sort(error.begin(), error.end(), compText);
-
+  f
   if (error.size() > 0) {
     std::string message = "Overworked: ";
     for (int i = 0; i < error.size(); i++) {
