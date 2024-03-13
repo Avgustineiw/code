@@ -1,6 +1,4 @@
 #include <iostream>
-#include <cstdlib>
-#include <algorithm>
 #include <string>
 #include <fstream>
 

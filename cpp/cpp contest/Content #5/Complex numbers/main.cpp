@@ -58,7 +58,8 @@ Complex Complex::operator-(Complex C)
     temp.re_ = re_ - C.re_;
     temp.im_ = im_ - C.im_;
     return temp;
-}
+} 
+
 
 Complex Complex::operator*(Complex C)
 {
@@ -136,3 +137,5 @@ int main()
 
     // return 0;
 }
+
+

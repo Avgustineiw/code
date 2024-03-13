@@ -16,7 +16,7 @@ int Distance(std::vector<int>& vec1, std::vector<int>& vec2, int size)
 void word2vec(int words, int size)
 {
     std::string buffer, name, vec_name;
-    std::vector<std::pair<std::string, int>> data;
+    std::vector<std::pair<std::string, int> > data;
     std::vector<int> nums, vec_nums;
     int tmp, max_val = 0, dist = 0;
 
