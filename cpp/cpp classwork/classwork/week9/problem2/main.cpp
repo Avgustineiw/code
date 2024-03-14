@@ -4,12 +4,15 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#include <random>
 #include <cstdlib>
 #include <ctime>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 class FootballTeam {
+public:
   std::string name_;
   std::string city_;
   std::string stadium_;
@@ -19,12 +22,12 @@ class FootballTeam {
   int losses_;
   int draws_;
 
-  public:
-  FootballTeam(std::string name, std::string city, std::string stadium, double level) {
-    name_ = name;
-    city_ = city;
-    stadium_ = stadium; 
-    level_ = level;
+public:
+  FootballTeam(std::string name = "", std::string city = "", std::string stadium = "", double level = 0) {
+    this->name_ = name;
+    this->city_ = city;
+    this->stadium_ = stadium; 
+    this->level_ = level;
     points_ = 0;
     wins_ = 0;
     losses_ = 0;
@@ -57,7 +60,7 @@ class FootballTeam {
   }
 
   void AddLoss()
-  
+  {  
     losses_++;
   }
 
@@ -71,7 +74,7 @@ class FootballTeam {
     return points_;
   }
 
-  int GetLevel()
+  double GetLevel()
   {
     return level_;
   }
@@ -86,20 +89,69 @@ struct Match
 
   void Play()
   {
-    int k = (rand() % ceil(abs(localTeam.level_ - visitorTeam.level_)) * 10);
-    std::cout << k;
+    int bound = ceil(abs(localTeam.GetLevel() - visitorTeam.GetLevel())) * 10;
+    int goals = (rand() % bound) + 1;
+    
+    for (size_t i = 0; i < goals; i++) {
+      double score = (rand() % (int(ceil(abs(localTeam.GetLevel() - visitorTeam.GetLevel())) + 1) * 10)) / 10 - localTeam.GetLevel();
+
+      if (score > 0) 
+        localGoals++;
+      else 
+        visitorGoals++;
+
+      std::cout << goals << " " << score << " " << localGoals << " " << visitorGoals << '\n';
+    }
+
+    if (localGoals > visitorGoals) {
+      localTeam.AddWin();
+      localTeam.SetPoints(localTeam.GetPoints() + 3);
+      visitorTeam.AddLoss();
+    }
+    else if (visitorGoals > localGoals) {
+      visitorTeam.AddWin();
+      visitorTeam.SetPoints(visitorTeam.GetPoints() + 3);
+      localTeam.AddLoss();
+    }
+    else {
+      visitorTeam.AddDraw();
+      visitorTeam.SetPoints(visitorTeam.GetPoints() + 1);
+      localTeam.AddDraw();
+      localTeam.SetPoints(localTeam.GetPoints() + 1);
+    }
   }
 };
 
 
+std::ostream& operator<<(std::ostream& out, Match match)
+{
+  out << "localTeam = " << match.localTeam.GetName() << " " << "visitorTeam = " << match.visitorTeam.GetName() << " "<< "stadium = " << match.localTeam.GetStadium() << " " << "result = " << match.localGoals << "-" << match.visitorGoals << '\n';
+  
+  return out;
+}
+
 struct Tournament
 {
   std::vector<FootballTeam> teams;
-  int round;
+  int round = 0;
 
   void SimulateRound()
   {
-    
+    for (size_t i = 0; i < teams.size() / 2; i++) {
+      std::cout << i + 1 << '\n';
+      int remaining = teams.size() - i - 1;
+      Match match = {teams[i], teams[remaining], 0, 0};
+      match.Play();
+      std::cout << match << '\n';
+    }
+
+    FootballTeam TT = teams.back();
+
+    for (size_t i = 1; i < teams.size(); i++) {
+      FootballTeam tmp = teams[i];
+      teams[i] = TT;
+      TT = tmp;
+    }
   }
 };
 
@@ -140,14 +192,15 @@ void loadTeams(std::istream& in, std::vector<FootballTeam>& teams)
       std::cout << "stadium = " << stadium << '\n';
       std::cout << "level = " << level << "\n\n";
 
-      FootballTeam team = {name, city, stadium, level};
-      teams.push_back(team);
+      FootballTeam t = FootballTeam(name, city, stadium, level);
+      teams.push_back(t);
   }
 }
 
 
 int main()
 {
+  srand(time(NULL));
   const std::string FILENAME = "football.csv";
   std::ifstream inputFile;
   inputFile.open(FILENAME);
@@ -155,6 +208,10 @@ int main()
   std::vector<FootballTeam> teams;
 
   loadTeams(inputFile, teams);
+
+  std::cout << teams.size() << '\n';
+  Tournament tournament = {teams, 0};
+  tournament.SimulateRound();
   
   return 0;
 }
