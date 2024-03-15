@@ -2,7 +2,7 @@
 #include <numeric>
 
 class Rational {
- public:
+public:
   int num;
   int denom;
   int div;
@@ -23,7 +23,7 @@ class Rational {
 
   int denominator() const { return denom; }
 
-  Rational operator=(const Rational &other) {
+  Rational operator=(const Rational& other) {
     num = other.num;
     denom = other.denom;
     return *this;
@@ -35,47 +35,47 @@ class Rational {
     return *this;
   }
 
-  Rational operator+(const Rational &other) const {
+  Rational operator+(const Rational& other) const {
     return Rational{num * other.denom + other.num * denom, denom * other.denom};
   }
-  Rational operator+(const int &other) const {
+  Rational operator+(const int& other) const {
     return Rational{num + other * denom, denom};
   }
-  Rational operator+=(const Rational &other) {
+  Rational operator+=(const Rational& other) {
     *this = *this + other;
     return *this;
   }
 
-  Rational operator-(const Rational &other) const { return -other + *this; }
+  Rational operator-(const Rational& other) const { return -other + *this; }
   Rational operator-(const int other) const {
     return Rational{num - other * denom, denom};
   }
-  friend Rational operator-(const int num, const Rational &other) {
+  friend Rational operator-(const int num, const Rational& other) {
     return Rational{num * other.denom - other.num, other.denom};
   }
-  Rational operator-=(const Rational &other) {
+  Rational operator-=(const Rational& other) {
     *this = *this - other;
     return *this;
   }
 
-  Rational operator*(const Rational &other) const {
+  Rational operator*(const Rational& other) const {
     return Rational{num * other.num, denom * other.denom};
   }
   Rational operator*(const int other) const {
     return Rational{other * num, denom};
   }
-  friend Rational operator*(const int num, const Rational &other) {
+  friend Rational operator*(const int num, const Rational& other) {
     return Rational{num * other.num, other.denom};
   }
-  Rational operator*=(const Rational &other) {
+  Rational operator*=(const Rational& other) {
     *this = *this * other;
     return *this;
   }
 
-  Rational operator/(const Rational &other) {
+  Rational operator/(const Rational& other) {
     return Rational{num * other.denom, denom * other.num};
   }
-  Rational operator/=(const Rational &other) {
+  Rational operator/=(const Rational& other) {
     *this = *this / other;
     return *this;
   }
@@ -83,7 +83,7 @@ class Rational {
   Rational operator-() const { return Rational{-num, denom}; }
   Rational operator+() const { return Rational{num, denom}; }
 
-  Rational &operator++() {
+  Rational& operator++() {
     *this += 1;
     return *this;
   }
@@ -94,7 +94,7 @@ class Rational {
     return old;
   }
 
-  Rational &operator--() {
+  Rational& operator--() {
     *this -= 1;
     return *this;
   }

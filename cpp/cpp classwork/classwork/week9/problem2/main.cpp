@@ -24,10 +24,10 @@ public:
 
 public:
   FootballTeam(std::string name = "", std::string city = "", std::string stadium = "", double level = 0) {
-    this->name_ = name;
-    this->city_ = city;
-    this->stadium_ = stadium; 
-    this->level_ = level;
+    name_ = name;
+    city_ = city;
+    stadium_ = stadium; 
+    level_ = level;
     points_ = 0;
     wins_ = 0;
     losses_ = 0;
@@ -80,6 +80,7 @@ public:
   }
 };
 
+
 struct Match
 {
   FootballTeam& localTeam;
@@ -125,10 +126,11 @@ struct Match
 
 std::ostream& operator<<(std::ostream& out, Match match)
 {
-  out << "localTeam = " << match.localTeam.GetName() << " " << "visitorTeam = " << match.visitorTeam.GetName() << " "<< "stadium = " << match.localTeam.GetStadium() << " " << "result = " << match.localGoals << "-" << match.visitorGoals << '\n';
+  out << "localTeam = " << match.localTeam.GetName() << ", " << "visitorTeam = " << match.visitorTeam.GetName() << ", "<< "stadium = " << match.localTeam.GetStadium() << ", " << "result = " << match.localGoals << "-" << match.visitorGoals << '\n';
   
   return out;
 }
+
 
 struct Tournament
 {
