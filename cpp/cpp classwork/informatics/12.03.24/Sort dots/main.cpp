@@ -1,11 +1,10 @@
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <cmath>
 
-struct Point
-{
+struct Point {
   int x_;
   int y_;
   double dist_;
@@ -16,18 +15,12 @@ struct Point
     dist_ = sqrt(pow(x, 2) + pow(y, 2));
   }
 
-  double Dist() {
-    return dist_;
-  }
+  double Dist() { return dist_; }
 };
 
-bool cmp(Point A, Point B)
-{
-  return A.Dist() < B.Dist();
-}
+bool cmp(Point A, Point B) { return A.Dist() < B.Dist(); }
 
-int main()
-{
+int main() {
   unsigned int n;
   int tmp_x, tmp_y;
   std::string buffer, tmp;
@@ -37,7 +30,7 @@ int main()
 
   for (size_t i = 0; i < n; i++) {
     std::cin >> tmp_x >> tmp_y;
-    
+
     Point vec{tmp_x, tmp_y};
     points.push_back(vec);
   }
@@ -49,4 +42,4 @@ int main()
   }
 
   return 0;
-}
+}  
