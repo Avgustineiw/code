@@ -1,1 +1,1 @@
-A repo for my uni coding stuff
+A repo for my uni stuff
