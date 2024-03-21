@@ -1,3 +1,4 @@
+
 #include <algorithm>
 #include <climits>
 #include <fstream>
@@ -98,17 +99,17 @@ double Account::getBalance(UnixTS timestamp) const
 {
   double balance = 0;
     for (auto& ele: this->transactions) {
-      if (ele.date <= timestamp) {
+      if (ele.date < timestamp) {
         if (ele.type == "withdraw") 
           balance -= ele.amount;
         else if (ele.type == "deposit")
           balance += ele.amount;
         else {
           if (ele.from == ele.to) {}
-          else if (ele.id == ele.from) {
+          else if (this->id == ele.from) {
             balance -= ele.amount;
           }
-          else if (ele.id == ele.to) {
+          else if (this->id == ele.to) {
             balance += ele.amount;
         }
       }
@@ -121,16 +122,7 @@ double Account::getBalance(UnixTS timestamp) const
 // Implement adding transaction to Account
 void Account::addTransaction(const Transaction& transaction)
 {
-  if (this->transactions.size() != 0) {
-    for (auto& ele: this->transactions) {
-      if (transaction < ele) {
-        this->transactions.insert(transaction);
-      }
-    }
-  }
-  else {
-    this->transactions.insert(transaction);
-  }
+  this->transactions.insert(transaction);
 }
 
 
