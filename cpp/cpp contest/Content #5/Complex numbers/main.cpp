@@ -62,7 +62,6 @@ Complex Complex::operator*(Complex C)
     temp.im_ = re_ * C.im_ + im_ * C.re_;
     return temp;
 }
-
 Complex Complex::operator/(Complex C)
 {
     Complex temp;
