@@ -142,14 +142,25 @@ TransactionContainer readTransactions(std::ifstream& fileStream)
 
     for (size_t i = 0; i < transactionsCount; ++i)
     {
-        std::stringstream ss(line);
-        std::string field;
-        Transaction transaction;
-        for (unsigned short i = 0; i < TRANSACTION_COL_N; i++)
-        {
-            // add your code here;
-        }
-        // and here;
+      std::getline(fileStream, line);
+      std::stringstream ss(line);
+      Transaction transaction;
+
+      std::string id, sdata, samount;
+      UnixTS date;
+      std::string type;
+      std::string from;
+      std::string to = "";
+      double amount;
+
+      ss >> id >> date >> type >> from;
+
+      if (type == "transfer")
+        ss >> to;
+      
+      ss >> amount;
+      transaction = Transaction{id, date, type, from, to, amount};
+      transactions.insert(transaction);
     }
 
 
@@ -160,12 +171,37 @@ AccountContainer readAccounts(std::ifstream& fileStream)
 {
     AccountContainer accounts;
 
-    // put your code here;
+    std::string line;
+    std::getline(fileStream, line);
+    size_t transactionsCount = std::stoul(line);
+    std::getline(fileStream, line);
+
+    for (size_t i = 0; i < transactionsCount; ++i)
+    {
+        std::stringstream ss(line);
+        std::string field;
+        Transaction transaction;
+        for (unsigned short i = 0; i < TRANSACTION_COL_N; i++)
+        {
+          std::getline(fileStream, line);
+          std::stringstream ss(line);
+          Account account;
+
+          std::string id, name;
+          UnixTS validity;
+          
+          ss >> id >> name >> validity;
+          account = Account(id, name, validity);
+          accounts[id] = account;
+        }
+    }
 
     return accounts;
 }
 
 void fillAccounts(AccountContainer& accounts, const TransactionContainer& transactions)
 {
-    // put your code here;
+  for (auto it: transactions) {
+    accounts[it.id].addTransaction(it);
+  }
 }

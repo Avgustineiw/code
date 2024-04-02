@@ -1,7 +1,7 @@
 #include "bank_accounts.h"
 
 
-const std::string dataPath = "data/transactions_accounts.csv";
+const std::string dataPath = "transactions_accounts.csv";
 
 void test1()
 {
@@ -101,9 +101,9 @@ int main()
     // uncomment test for task
     // test1();
     // test2();
-    test3();
-    test4();
-    // test5();
+    // test3();
+    // test4();
+    test5();
 
     return 0;
 }
