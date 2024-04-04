@@ -64,7 +64,7 @@ public:
 class Administrator : public Employee, public Manager
 {
 public:
-  Administrator(std::string name) : Employee("77"), Manager("88"), User(name) {};
+  Administrator(std::string name) : Employee(""), Manager(""), User(name) {};
   virtual void accessResources() const {
     std::cout << name << " has has administrator level access" << '\n';
   }
