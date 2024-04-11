@@ -1,104 +1,119 @@
-#include <chrono>
-#include <ctime>
-#include <fstream>
-#include <ios>
+#include <cstdlib>
 #include <iostream>
-#include <stdexcept>
-#include <string>
+
 
 /*
-Design a logging system in C++ that allows for messages of different severity levels to be
- recorded to a file. Your task involves creating a `Logger` class that supports logging messages
- with varying levels of importance, namely ERROR, WARNING, INFO, and DEBUG. The `Logger` class
- should be implemented as a singleton to ensure that only one instance can exist throughout the application.
- It must provide a method to set the logging level and another to log messages, which includes the message's timestamp,
- its level, and the text. The logger should append messages to a log file, with the ability to
- specify the file's name when accessing the logger instance for the first time. Additionally,
- the logger should ignore messages that are below the current logging level.
+В рамках организации благотворительного марафона, необходимо 
+создать программу для регистрации участников, которая строго 
+проверяет возрастные ограничения. Марафон открыт для участников 
+в возрасте от 18 до 60 лет включительно. Программа должна запросить 
+у пользователя его возраст и выбранную дистанцию, а затем проверить, 
+удовлетворяет ли возраст условиям участия в марафоне. 
+Если условия нарушены, программа должна сгенерировать исключение.
 
-Implement a demonstration of using this logging system by creating a simple function that performs an
- operation (e.g., summing two integers) and logs messages at different levels based on the operation's
- progression. The main function should adjust the logging level to demonstrate filtering based on the
- level and ensure that the logging output includes relevant timestamps and message levels.
+Задачи:
+Определить класс исключения AgeRestrictionException, 
+который должен содержать сообщение об ошибке, указывающее на
+ то, что возраст участника не соответствует требованиям.
+Создать функцию registerParticipant, которая принимает возраст
+ участника и выбранную дистанцию. Функция должна проверять, 
+ соответствует ли возраст ограничениям. Если нет, функция должна 
+ бросить исключение AgeRestrictionException.
+В функции main реализовать запрос на ввод возраста и дистанции
+ от пользователя, вызов функции registerParticipant и обработку
+ возможного исключения, выводящую сообщение об ошибке, если возраст
+  участника не попадает в допустимый диапазон.
+Требования:
+Использовать механизм исключений C++ для обработки ошибок, 
+связанных с возрастными ограничениями.
+Предусмотреть корректную обработку пользовательского ввода, включая
+ ввод нечисловых значений.
+Вывести подтверждение успешной регистрации, если возраст участника 
+соответствует требованиям.
+
+Введите ваш возраст: 25
+Выберите дистанцию (5km, 10km, 21km): 10km
+Регистрация успешно завершена!
+
+Введите ваш возраст: 17
+Выберите дистанцию (5km, 10km, 21km): 5km
+Ошибка: Ваш возраст не соответствует требованиям для участия в
+ марафоне.
+
 */
 
-class Logger {
- public:
-  enum class Level {
-    ERROR = 0,
-    WARNING,
-    INFO,
-    DEBUG,
-  };
+#include <iostream>
+#include <exception>
+#include <string>
 
- private:
-  std::ofstream logFile;
-  Level currentLevel;
+class AgeRestrictionException : std::exception
+{
+private:
+  std::string msg;
+  int code;
 
-  Logger(const std::string &filename, Level level = Level::INFO) : currentLevel(level) {
-    logFile.open(filename, std::ios::app);
-    if (!logFile.is_open()) {
-      throw std::runtime_error("Failed to open log file");
-    }
+public:
+  AgeRestrictionException(std::string msg, int code): msg(msg), code(code) {};
+
+  int getCode() const {
+    return code;
   }
 
-  Logger(const Logger &) = delete;
-  Logger &operator=(const Logger &) = delete;
-
- public:
-  ~Logger() {
-    logFile.close();
-  }
-  static Logger &getInstance(const std::string &filename = "logfile.txt") {
-    static Logger instance(filename);
-    return instance;
-  }
-
-  void setLevel(Level level) {
-    this->currentLevel = level;
-  }
-
-  void log(const std::string &message, Level level = Level::INFO) {
-    if (currentLevel >= level) {
-      auto t = std::chrono::system_clock::now();
-      std::time_t time = std::chrono::system_clock::to_time_t(t);
-      logFile << std::ctime(&time) << " " << levelToString(level) << ": " << message << '\n';
-      std::cout << std::ctime(&time) << " " << levelToString(level) << ": " << message << '\n';
-    }
-  }
-
- private:
-  std::string levelToString(Level level) {
-    switch (level) {
-      case Level::DEBUG:
-        return "DEBUG";
-        break;
-      case Level::INFO:
-        return "INFO";
-        break;
-      case Level::ERROR:
-        return "ERROR";
-        break;
-      case Level::WARNING:
-        return "WARNING";
-        break;
-    }
+  const char* what() const throw() {
+    return msg.c_str();
   }
 };
 
-auto &logger = Logger::getInstance();
+void registerParticipant(int age) {
+  if (age < 18 || age > 60) {
+    throw AgeRestrictionException("Ваш возраст не соответствует требованиям участия в марафоне", 101);
+    std::cout << "Registration failed" << '\n';
+  }
+  else {
+    std::cout << "Регистрация успешно завершена!" << '\n';
+  }
+  return;
+}
 
-int sum(int a, int b) {
-  logger.log("Зашли в метод sum.", Logger::Level::DEBUG);
-  int res = a + b;
-  logger.log("Суммируем числа " + std::to_string(a) + " "
-                 + std::to_string(b) + ", res = " + std::to_string(res) + '.',
-             Logger::Level::INFO);
-  return a + b;
-}  
+
+bool check_number(std::string str) {
+  for (int i = 0; i < str.length(); i++) {
+    if (isdigit(str[i]) == false)
+      return false;
+  }
+  return true;
+}
+
 
 int main() {
-  logger.setLevel(Logger::Level::DEBUG);
-  sum(10, 30);
+  std::string user_input_age;
+  std::string user_input_dist;
+
+  std::cout << "Введите ваш возраст: ";
+  std::cin >> user_input_age;
+
+  if (!check_number(user_input_age)) {
+    std::cout << "Incorrect format";
+    std::exit(0);
+  }
+  
+  std::cout << "Выберите дистанцию (5km, 10km, 21km): ";
+  std::cin >> user_input_dist;
+
+  if (!check_number(user_input_dist)) {
+    std::cout << "Incorrect format";
+    std::exit(0);
+  }
+  else if (stoi(user_input_dist) != 5 && stoi(user_input_dist) != 10 && stoi(user_input_dist) != 21) {
+    std::cout << "Incorrect format";
+    std::exit(0);
+  }
+
+  try {
+    registerParticipant(stoi(user_input_age));
+  } catch (AgeRestrictionException& e) {
+    std::cout << "Ошибка: " << e.what() << "\n\n";
+  }
+
   return 0;
 }
