@@ -11,8 +11,8 @@ int main()
 
   for (int i = 0; i < n; i++) {
     std::cin >> word_1 >> word_2;
-    data.insert({word_1, word_2});
-    data.insert({word_2, word_1});
+    data[word_1] = word_2;
+    data[word_2] = word_1;
   }
   
   std::string res;
