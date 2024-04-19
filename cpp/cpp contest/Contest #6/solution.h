@@ -177,45 +177,73 @@ void insertInlineCitations(std::string& text, const std::map<std::string, Citati
 
 
 // task 5
+// void printBibliographyAppearance(std::string& text, const std::map<std::string, Citation*>& citations)
+// {
+//   std::string tmp_key = "";
+//   bool flag = false;
+//   std::vector<std::string> data;
+//   std::set<std::string> unique_data;
+//
+//   for (char c: text) {
+//     if (c == '{') {
+//       flag = true;
+//     }
+//     else if (c == '}') {
+//       tmp_key += c;
+//
+//       if (unique_data.find(tmp_key) == unique_data.end()) {
+//         data.push_back(tmp_key);
+//         unique_data.insert(tmp_key);
+//       }
+//
+//       tmp_key = "";
+//       flag = false;
+//     }
+//
+//     if (flag)
+//       tmp_key += c;
+//   }
+//
+//   int cnt = 1;
+//   for (auto& ele: data) {
+//     for (auto& citation: citations) {
+//       if (ele == citation.first) {
+//         std::cout << cnt << '.' << '\n';
+//         citation.second->printCitation(std::cout);
+//         cnt++;
+//       }
+//     }
+//   }
+// }
 void printBibliographyAppearance(std::string& text, const std::map<std::string, Citation*>& citations)
 {
-  std::string tmp_key = "";
-  bool flag = false;
-  std::vector<std::string> data;
-  std::set<std::string> unique_data;
+    int cnt = 1;
+    std::set<std::string> citationOccurred;
+    while (true)
+    {
+        if (text.find('{') == std::string::npos)
+        {
+            break;
+        }
+        int b = text.find('{');
+        int e = text.find('}');
+        std::string s1 = text.substr(b, (e-b+1));
 
-  for (char c: text) {
-    if (c == '{') {
-      flag = true;
+        std::map<std::string, Citation* >::const_iterator it = citations.find(s1);
+        
+        if (citationOccurred.find(s1) == citationOccurred.end()) {
+          citationOccurred.insert(s1);
+          std::cout << cnt << "." << std::endl;
+          it->second->printCitation(std::cout);
+          ++cnt;
+          std::string s2 = it->second->getInlineCitation();
+          while (text.find(s1) != std::string::npos) {
+            text.replace(text.find(s1), s1.size(), s2);
+          }
+        }
     }
-    else if (c == '}') {
-      tmp_key += c;
-
-      if (unique_data.find(tmp_key) == unique_data.end()) {
-        data.push_back(tmp_key);
-        unique_data.insert(tmp_key);
-      }
-
-      tmp_key = "";
-      flag = false;
-    }
-
-    if (flag)
-      tmp_key += c;
-  }
-
-  int cnt = 1;
-  for (auto& ele: data) {
-    for (auto& citation: citations) {
-      if (ele == citation.first) {
-        std::cout << cnt << '.' << '\n';
-        citation.second->printCitation(std::cout);
-        cnt++;
-      }
-    }
-  }
+    return;
 }
-
 
 // task 6
 // you may modify classes in any way you want to solve this task
